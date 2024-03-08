@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "yakrazor"
 version = "0.1.0"
-description = ""
+description = "Yak Razor: Scheduler for Yak Shavers"
 authors = ["Harshad Sharma <harshad@sharma.io>"]
 readme = "README.md"
 packages = [{include = "yakrazor", from = "src"}]
