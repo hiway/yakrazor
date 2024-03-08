@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "yakrazor"
+version = "0.1.0"
+description = ""
+authors = ["Harshad Sharma <harshad@sharma.io>"]
+readme = "README.md"
+packages = [{include = "yakrazor", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
