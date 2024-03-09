@@ -12,8 +12,6 @@ a required diversion to complete the initial task?
   I forget how I got here and
   what was the last thing I was doing and
   the one before that...
-- I forget to use my todo app
-- I forget to add todos for ad-hoc requests
 - Some days I don't want to start with the most demanding task
 - I feel overwhelmed with too many pending tasks
 - I don't wake up at the same time every day and
@@ -21,6 +19,8 @@ a required diversion to complete the initial task?
 - I have way too many things to get done and
   many of those things depend on someone else and
   I have to follow up, which I also forget
+- I forget to add todos for ad-hoc requests
+- I forget to use my todo app
 
 If the constraints sound familiar, 
 Yakrazor might help.
