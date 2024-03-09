@@ -40,15 +40,20 @@ Yakrazor might help.
 
 ## Features
 
-- Organize tasks with
+- Organize and schedule tasks with
   - Due date/time
   - Importance
   - Urgency
   - Effort
   - Estimated time to complete
+  - Other tasks
   - Tags
   - Places
   - People
   - Organizations
+  - Activity (walking, driving, workout, active apps)
+  - Weather conditions or predictions
+  - Sun rise or set times
   - Links (URLs)
   - Clips (data scraped from any web site or api)
+  - Files (track changes in local files)
