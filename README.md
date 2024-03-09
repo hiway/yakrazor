@@ -42,7 +42,7 @@ Yakrazor might help.
 
 ## Features
 
-Organize and schedule tasks with
+### Organize and schedule tasks with
 
   - Due date/time
   - Importance
@@ -61,14 +61,14 @@ Organize and schedule tasks with
   - Clips (data scraped from any web site or api)
   - Files (track changes in local files)
 
-Suggested tasks 
+### Suggested tasks 
 
   - Take your pick from list of tasks
   - Filtered and ranked based on your energy and context
   - System trains on your choices to suggest tasks that
     you're most likely to complete
 
-Plan long term projects and goals
+### Plan long term projects and goals
 
   - Break large tasks into smaller chunks
   - Repeating tasks to build up to a habit or goal
