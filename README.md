@@ -90,4 +90,5 @@ Yakrazor might help.
 
 - Break large tasks into smaller chunks
 - Repeating tasks to build up to a habit or goal
-- Templates for recurring projects (such as growing vegetables)
+- Templates for recurring projects 
+  (such as growing vegetables, or daily/weekly self-care)
