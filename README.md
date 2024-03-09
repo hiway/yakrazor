@@ -75,7 +75,8 @@ Yakrazor might help.
 - System trains on your choices to suggest tasks that
   you're most likely to complete
 
-### Plan long term projects and goals
+### Projects, Habits and Goals
 
 - Break large tasks into smaller chunks
 - Repeating tasks to build up to a habit or goal
+- Templates for recurring projects (such as growing vegetables)
