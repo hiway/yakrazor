@@ -54,6 +54,6 @@ Yakrazor might help.
   - Activity (walking, driving, workout, active apps)
   - Weather conditions or predictions
   - Sun rise or set times
-  - Links (URLs)
+  - Links (Base URLs to match in text)
   - Clips (data scraped from any web site or api)
   - Files (track changes in local files)
