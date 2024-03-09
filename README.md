@@ -7,7 +7,7 @@ only to find yourself on a side quest of a side quest that was
 a required diversion to complete the initial task?
 But you've lost track of what prompted you 
 to take up the side quest and now the original task
-remains unfinished and you've moved on to something else?
+remains unfinished and you've moved on to something else.
 
 Yup.
 
