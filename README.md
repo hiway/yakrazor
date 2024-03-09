@@ -37,3 +37,18 @@ Yakrazor might help.
 - Task scheduler
 - Long term planner
 - Self-hosted web app
+
+## Features
+
+- Organize tasks with
+  - Due date/time
+  - Importance
+  - Urgency
+  - Effort
+  - Estimated time to complete
+  - Tags
+  - Places
+  - People
+  - Organizations
+  - Links (URLs)
+  - Clips (data scraped from any web site or api)
