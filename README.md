@@ -42,33 +42,40 @@ Yakrazor might help.
 
 ## Features
 
+### Create tasks with
+
+- Text
+- Voice
+- Photo
+- Video
+
 ### Organize and schedule tasks with
 
-  - Due date/time
-  - Importance
-  - Urgency
-  - Effort
-  - Estimated time to complete
-  - Other tasks
-  - Tags
-  - Places
-  - People
-  - Organizations
-  - Activity (walking, driving, workout, active apps)
-  - Weather conditions or predictions
-  - Sun rise or set times
-  - Links (Base URLs to match in text)
-  - Clips (data scraped from any web site or api)
-  - Files (track changes in local files)
+- Due date/time
+- Importance
+- Urgency
+- Effort
+- Estimated time to complete
+- Other tasks
+- Tags
+- Places
+- People
+- Organizations
+- Activity (walking, driving, workout, active apps)
+- Weather conditions or predictions
+- Sun rise or set times
+- Links (Base URLs to match in text)
+- Clips (data scraped from any web site or api)
+- Files (track changes in local files)
 
 ### Suggested tasks 
 
-  - Take your pick from list of tasks
-  - Filtered and ranked based on your energy and context
-  - System trains on your choices to suggest tasks that
-    you're most likely to complete
+- Take your pick from list of tasks
+- Filtered and ranked based on your energy and context
+- System trains on your choices to suggest tasks that
+  you're most likely to complete
 
 ### Plan long term projects and goals
 
-  - Break large tasks into smaller chunks
-  - Repeating tasks to build up to a habit or goal
+- Break large tasks into smaller chunks
+- Repeating tasks to build up to a habit or goal
