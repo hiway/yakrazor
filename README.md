@@ -71,13 +71,6 @@ Yakrazor might help.
 - Files (track changes in local files)
 
 
-### Projects, Habits and Goals
-
-- Break large tasks into smaller chunks
-- Repeating tasks to build up to a habit or goal
-- Templates for recurring projects (such as growing vegetables)
-
-
 ### Track and manage time spent on tasks
 
 - One-button time tracking
@@ -91,3 +84,10 @@ Yakrazor might help.
 - Filtered and ranked based on your energy and context
 - System trains on your choices to suggest tasks that
   you're most likely to complete
+
+
+### Projects, Habits and Goals
+
+- Break large tasks into smaller chunks
+- Repeating tasks to build up to a habit or goal
+- Templates for recurring projects (such as growing vegetables)
