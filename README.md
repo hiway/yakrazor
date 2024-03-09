@@ -11,6 +11,7 @@ remains unfinished and you've moved on to something else.
 
 Yup.
 
+
 ## Why Yakrazor?
 
 - I get distracted or go off on a side quest too often and
@@ -37,6 +38,7 @@ Yakrazor might help.
 - Task scheduler
 - Long term planner
 - Self-hosted web app
+
 
 ## Features
 
