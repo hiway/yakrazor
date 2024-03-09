@@ -7,8 +7,11 @@ readme = "README.md"
 packages = [{include = "yakrazor", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.2"
+pytest-asyncio = "^0.23.5.post1"
 
 [build-system]
 requires = ["poetry-core"]
