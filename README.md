@@ -29,3 +29,11 @@ Yup.
 
 If the constraints sound familiar, 
 Yakrazor might help.
+
+
+## What is Yakrazor?
+
+- Todo list 
+- Task scheduler
+- Long term planner
+- Self-hosted web app
