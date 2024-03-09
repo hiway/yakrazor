@@ -42,12 +42,14 @@ Yakrazor might help.
 
 ## Features
 
+
 ### Create tasks with
 
 - Text
 - Voice
 - Photo
 - Video
+
 
 ### Organize and schedule tasks with
 
@@ -68,15 +70,24 @@ Yakrazor might help.
 - Clips (data scraped from any web site or api)
 - Files (track changes in local files)
 
-### Suggested tasks 
-
-- Take your pick from list of tasks
-- Filtered and ranked based on your energy and context
-- System trains on your choices to suggest tasks that
-  you're most likely to complete
 
 ### Projects, Habits and Goals
 
 - Break large tasks into smaller chunks
 - Repeating tasks to build up to a habit or goal
 - Templates for recurring projects (such as growing vegetables)
+
+
+### Track and manage time spent on tasks
+
+- One-button time tracking
+- Time spent on required side quests is included
+- Pomodoro system to manage work and breaks
+
+
+### Suggested tasks 
+
+- Take your pick from list of tasks
+- Filtered and ranked based on your energy and context
+- System trains on your choices to suggest tasks that
+  you're most likely to complete
