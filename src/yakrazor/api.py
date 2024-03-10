@@ -6,18 +6,18 @@ from yakrazor.models import Task, TaskStatus
 
 
 class TasksAPI:
-    async def create(self, name: str, status: str) -> dict:
+    async def create(self, name: str, status: str) -> Task:
         task = await Task.create(
             name=name,
             status_value=TaskStatus[status.upper()],
         )
         return task
 
-    async def by_uuid(self, uuid: str) -> dict:
+    async def by_uuid(self, uuid: str) -> Task:
         task = await Task.get(uuid=uuid)
         return task
 
-    async def update(self, uuid: str, name: str = None, status: str = None) -> dict:
+    async def update(self, uuid: str, name: str = None, status: str = None) -> Task:
         task = await Task.get(uuid=uuid)
         if name:
             task.name = name
@@ -31,11 +31,11 @@ class TasksAPI:
         task = await Task.get(uuid=uuid)
         await task.delete()
 
-    async def list(self) -> list:
+    async def list(self) -> list[Task]:
         tasks = await Task.all()
         return tasks
 
-    async def filter_by_status(self, status: str) -> list:
+    async def filter_by_status(self, status: str) -> list[Task]:
         tasks = await Task.filter(status_value=TaskStatus[status.upper()])
         return tasks
 
