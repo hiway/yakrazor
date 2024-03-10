@@ -73,8 +73,8 @@ Yakrazor might help.
 
 ### Track and manage time spent on tasks
 
-- One-button time tracking
-- Time spent on required side quests is included
+- Automatic time tracking
+- Time spent on tangents is included
 - Pomodoro system to manage work and breaks
 
 
@@ -92,3 +92,10 @@ Yakrazor might help.
 - Repeating tasks to build up to a habit or goal
 - Templates for recurring projects 
   (such as growing vegetables, or daily/weekly self-care)
+
+
+### Sessions
+
+- Start a new week or day with blank slate
+- Pick what you want to tackle
+- Review or continue previous sessions later
