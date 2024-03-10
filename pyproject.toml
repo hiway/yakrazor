@@ -8,6 +8,7 @@ packages = [{include = "yakrazor", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+tortoise-orm = "^0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.2"
