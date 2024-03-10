@@ -1,5 +1,6 @@
 import datetime
 from dataclasses import dataclass
+from typing import List
 
 from yakrazor import database
 from yakrazor.models import Task, TaskStatus
@@ -31,11 +32,11 @@ class TasksAPI:
         task = await Task.get(uuid=uuid)
         await task.delete()
 
-    async def list(self) -> list[Task]:
+    async def list(self) -> List[Task]:
         tasks = await Task.all()
         return tasks
 
-    async def filter_by_status(self, status: str) -> list[Task]:
+    async def filter_by_status(self, status: str) -> List[Task]:
         tasks = await Task.filter(status_value=TaskStatus[status.upper()])
         return tasks
 
