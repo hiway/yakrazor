@@ -14,7 +14,7 @@ class TasksAPI:
         )
         return task
 
-    async def by_uuid(self, uuid: str) -> Task:
+    async def get(self, uuid: str) -> Task:
         task = await Task.get(uuid=uuid)
         return task
 

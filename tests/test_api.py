@@ -21,7 +21,7 @@ async def test_create_task(api):
 
 async def test_get_task(api):
     task = await api.task.create(name="test", status="todo")
-    retrieved_task = await api.task.by_uuid(uuid=task.uuid)
+    retrieved_task = await api.task.get(uuid=task.uuid)
     assert task == retrieved_task
 
 
@@ -35,7 +35,7 @@ async def test_delete_task(api):
     task = await api.task.create(name="test", status="todo")
     await api.task.delete(uuid=task.uuid)
     with pytest.raises(DoesNotExist):
-        await api.task.by_uuid(uuid=task.uuid)
+        await api.task.get(uuid=task.uuid)
 
 
 async def test_list_tasks(api):
