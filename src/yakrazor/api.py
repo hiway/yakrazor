@@ -32,7 +32,7 @@ class TasksAPI:
         task = await Task.get(uuid=uuid)
         await task.delete()
 
-    async def list(self) -> List[Task]:
+    async def all(self) -> List[Task]:
         tasks = await Task.all()
         return tasks
 

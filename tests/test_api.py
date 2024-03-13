@@ -41,7 +41,7 @@ async def test_delete_task(api):
 async def test_list_tasks(api):
     task1 = await api.task.create(name="test1", status="todo")
     task2 = await api.task.create(name="test2", status="todo")
-    tasks = await api.task.list()
+    tasks = await api.task.all()
     assert task1 in tasks
     assert task2 in tasks
 
