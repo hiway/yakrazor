@@ -6,7 +6,7 @@ from yakrazor import database
 from yakrazor.models import Task, TaskStatus
 
 
-class TasksAPI:
+class TaskAPI:
     async def create(self, name: str, status: str) -> Task:
         task = await Task.create(
             name=name,
@@ -49,7 +49,7 @@ class YakrazorAPI:
     """
 
     database_url: str
-    task: TasksAPI = TasksAPI()
+    task: TaskAPI = TaskAPI()
 
     async def start(self) -> None:
         await database.open(self.database_url)
