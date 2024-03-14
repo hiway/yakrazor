@@ -52,3 +52,27 @@ async def test_filter_tasks_by_status(api):
     tasks = await api.task.filter_by_status(status="Doing")
     assert task2 in tasks
     assert task1 not in tasks
+
+
+async def test_list_todo_tasks(api):
+    task1 = await api.task.create(name="test1", status="todo")
+    task2 = await api.task.create(name="test2", status="doing")
+    tasks = await api.task.todo()
+    assert task1 in tasks
+    assert task2 not in tasks
+
+
+async def test_list_doing_tasks(api):
+    task1 = await api.task.create(name="test1", status="todo")
+    task2 = await api.task.create(name="test2", status="doing")
+    tasks = await api.task.doing()
+    assert task2 in tasks
+    assert task1 not in tasks
+
+
+async def test_list_done_tasks(api):
+    task1 = await api.task.create(name="test1", status="todo")
+    task2 = await api.task.create(name="test2", status="done")
+    tasks = await api.task.done()
+    assert task2 in tasks
+    assert task1 not in tasks

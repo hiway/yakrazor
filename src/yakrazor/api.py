@@ -40,6 +40,18 @@ class TaskAPI:
         tasks = await Task.filter(status_value=TaskStatus[status.upper()])
         return tasks
 
+    async def todo(self) -> List[Task]:
+        tasks = await Task.filter(status_value=TaskStatus.TODO)
+        return tasks
+    
+    async def doing(self) -> List[Task]:
+        tasks = await Task.filter(status_value=TaskStatus.DOING)
+        return tasks
+
+    async def done(self) -> List[Task]:
+        tasks = await Task.filter(status_value=TaskStatus.DONE)
+        return tasks
+
 
 @dataclass
 class YakrazorAPI:
