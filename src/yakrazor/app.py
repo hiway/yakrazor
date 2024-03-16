@@ -58,20 +58,19 @@ async def tasks_list():
         for index, task in enumerate(tasks_todo + tasks_done):
             with ui.row().classes("items-center w-full"):
                 if task.done:
-                    ui.button(
-                        icon="check",
-                        color="green",
-                        on_click=lambda e, task=task: api.task_update_done(
-                            task.uuid, False
-                        ),
-                    ).props("dense fab-mini")
+                    done_icon="check"
+                    done_color="green"
                 else:
-                    ui.button(
-                        icon="check_box_outline_blank",
-                        on_click=lambda e, task=task: api.task_update_done(
-                            task.uuid, True
-                        ),
-                    ).props("dense fab-mini")
+                    done_icon="check_box_outline_blank"
+                    done_color="primary"
+                ui.button(
+                    icon=done_icon,
+                    color=done_color,
+                    on_click=lambda e, task=task: api.task_update_done(
+                        task.uuid, False
+                    ),
+                ).props("dense fab-mini")
+
                 lbl_task_name = ui.label(task.name).classes("flex-grow").props("dense")
                 if index == 0:
                     lbl_task_name.classes(add="font-bold")
