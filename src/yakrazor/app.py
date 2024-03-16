@@ -72,28 +72,9 @@ async def tasks_list():
                             task.uuid, True
                         ),
                     ).props("dense fab-mini")
+                txt_task_name = ui.label(task.name).classes("flex-grow").props("dense")
                 if index == 0:
-                    txt_task_name = (
-                        ui.input(
-                            on_change=lambda e, task=task: api.task_update_name(
-                                task.uuid, txt_task_name.value
-                            ),
-                            value=task.name,
-                        )
-                        .classes("flex-grow font-bold")
-                        .props("dense input-style='font-weight: bold;'")
-                    )
-                else:
-                    txt_task_name = (
-                        ui.input(
-                            on_change=lambda e, task=task: api.task_update_name(
-                                task.uuid, txt_task_name.value
-                            ),
-                            value=task.name,
-                        )
-                        .classes("flex-grow")
-                        .props("dense")
-                    )
+                    txt_task_name.classes(add="font-bold")
 
                 with ui.button(icon="more_vert").props(
                     "flat fab-mini color=grey dense"
@@ -106,7 +87,20 @@ async def tasks_list():
                         ui.menu_item(
                             "Move down",
                             on_click=lambda e, task=task: api.task_move_down(task.uuid),
-                        ).classes("h-5")
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move to top",
+                            on_click=lambda e, task=task: api.task_move_to_top(
+                                task.uuid
+                            ),
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move to bottom",
+                            on_click=lambda e, task=task: api.task_move_to_bottom(
+                                task.uuid
+                            ),
+                        ).classes("pt-3 h-5")
+                        ui.separator().classes("h-1")
                         ui.menu_item(
                             "Delete",
                             on_click=lambda e, task=task: api.task_delete(task.uuid),

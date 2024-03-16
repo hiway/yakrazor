@@ -129,3 +129,55 @@ async def test_move_down_task_last(api):
     tasks = await api.task_list_all()
     assert tasks[0] == task1
     assert tasks[1] == task2
+
+
+async def test_move_up_task_first_later(api):
+    task1 = await api.task_create("test1", later=True)
+    task2 = await api.task_create("test2", later=True)
+    await api.task_move_up(task1.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task1
+    assert tasks[1] == task2
+    await api.task_move_up(task2.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task2
+    assert tasks[1] == task1
+
+
+async def test_move_up_task_first_now(api):
+    task1 = await api.task_create("test1", later=False)
+    task2 = await api.task_create("test2", later=False)
+    await api.task_move_up(task1.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task1
+    assert tasks[1] == task2
+    await api.task_move_up(task2.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task2
+    assert tasks[1] == task1
+
+
+async def test_move_down_task_last_later(api):
+    task1 = await api.task_create("test1", later=True)
+    task2 = await api.task_create("test2", later=True)
+    await api.task_move_down(task2.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task1
+    assert tasks[1] == task2
+    await api.task_move_down(task1.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task2
+    assert tasks[1] == task1
+
+
+async def test_move_down_task_last_now(api):
+    task1 = await api.task_create("test1", later=False)
+    task2 = await api.task_create("test2", later=False)
+    await api.task_move_down(task2.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task1
+    assert tasks[1] == task2
+    await api.task_move_down(task1.uuid)
+    tasks = await api.task_list_all()
+    assert tasks[0] == task2
+    assert tasks[1] == task1

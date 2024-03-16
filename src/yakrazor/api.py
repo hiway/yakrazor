@@ -98,3 +98,25 @@ class YakrazorAPI:
                 await task.save()
                 await lower_task.save()
         await self.refresh()
+
+    async def task_move_to_top(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.all().order_by("order")
+            if tasks:
+                top_task = tasks[0]
+                task.order = top_task.order - 1
+                await task.save()
+                await top_task.save()
+        await self.refresh()
+
+    async def task_move_to_bottom(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.all().order_by("-order")
+            if tasks:
+                bottom_task = tasks[0]
+                task.order = bottom_task.order + 1
+                await task.save()
+                await bottom_task.save()
+        await self.refresh()
