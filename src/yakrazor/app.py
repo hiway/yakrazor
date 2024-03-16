@@ -41,18 +41,20 @@ async def home():
                 ui.menu_item("Import").classes("pt-3 h-5")
                 ui.separator().classes("h-1")
                 ui.menu_item("Settings").classes("pt-3 h-5")
- 
+
     with ui.card().classes("w-full"):
-        badge_date = ui.badge('Saturday, 16 March', color='secondary').props('floating')
+        badge_date = ui.badge("Saturday, 16 March", color="secondary").props("floating")
         with ui.row().classes("w-full"):
-            ui.select(["Chores", "Shopping", "Work", "Personal"], value="Chores").classes("flex-grow").props("dense")
+            ui.select(
+                ["All", "Home", "Shopping", "Work", "Personal"], value="Home"
+            ).classes("flex-grow").props("dense")
             with ui.button(icon="more_vert").props("flat fab-mini color=grey dense"):
                 with ui.menu().classes("w-40"):
                     ui.menu_item("Clear All Tasks").classes("pt-3 h-5")
                     ui.separator()
                     ui.menu_item("New Project").classes("pt-3 h-5")
                     ui.menu_item("Delete Project").classes("pt-3 h-5")
-        
+
         with ui.row().classes("w-full"):
             ui.input(placeholder="Get this done...").classes("flex-grow").props("dense")
             with ui.button(icon="add").props("flat fab-mini color=grey dense"):
@@ -63,17 +65,31 @@ async def home():
                     ui.menu_item("Later").classes("pt-3 h-5")
 
     with ui.card().classes("w-full"):
-        badge_completed = ui.badge('0 of 7 completed', color='primary').props('floating')
-        for index in range(7):
+        badge_completed = ui.badge("3 of 7 completed", color="primary").props(
+            "floating"
+        )
+        for task_name, completed in [
+            ("Walk dogs", False),
+            ("Feed dogs", False),
+            ("Clean desk", False),
+            ("Work on Yakrazor", False),
+            ("Clean dogs' dens", True),
+            ("Feed cats", True),
+            ("Fix caffeine:blood ratio", True),
+        ]:
             with ui.row().classes("items-center w-full"):
-                ui.checkbox().props("dense")
-                ui.label(f"Task {index + 1}").classes("flex-grow font-bold").props("dense")
-                with ui.button(icon="more_vert").props("flat fab-mini color=grey dense"):
-                    with ui.menu():
-                        ui.menu_item("Move up").classes("pt-3 h-5")
-                        ui.menu_item("Move down").classes("pt-3 h-5")
-            ui.separator()
-
+                ui.checkbox(value=completed).props("dense")
+                ui.label(task_name).classes("flex-grow font-bold").props(
+                    "dense"
+                )
+                with ui.button(icon="more_vert").props(
+                    "flat fab-mini color=grey dense"
+                ):
+                    with ui.menu().classes("w-40"):
+                        ui.label("Effort").classes("ml-4 pt-3 h-5")
+                        ui.slider(min=1, max=10, value=3).classes("pl-4 pr-4 pt-3 h-5")
+                        ui.menu_item("Deadline").classes("pt-3 h-5")
+                        ui.menu_item("Triggers").classes("pt-3 h-5")
 
 
 api = YakrazorAPI(database_url="sqlite://:memory:")
