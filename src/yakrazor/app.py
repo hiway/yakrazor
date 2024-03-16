@@ -72,14 +72,28 @@ async def tasks_list():
                             task.uuid, True
                         ),
                     ).props("dense fab-mini")
-                txt_task_name = ui.label(task.name).classes("flex-grow").props("dense")
+                lbl_task_name = ui.label(task.name).classes("flex-grow").props("dense")
                 if index == 0:
-                    txt_task_name.classes(add="font-bold")
+                    lbl_task_name.classes(add="font-bold")
+
+                with ui.dialog() as dialog, ui.card():
+                    txt_task_name = ui.input(
+                        value=task.name,
+                        on_change=lambda e, task=task: api.task_update_name(
+                            task.uuid, e.value
+                        ),
+                    )
+                    ui.button("Save", on_click=lambda: (dialog.close(), tasks_list.refresh()))
 
                 with ui.button(icon="more_vert").props(
                     "flat fab-mini color=grey dense"
                 ):
                     with ui.menu().classes("w-40"):
+                        ui.menu_item(
+                            "Edit",
+                            on_click=lambda e, task=task, dialog=dialog: dialog.open(),
+                        ).classes("pt-3 h-5")
+                        ui.separator().classes("h-1")
                         ui.menu_item(
                             "Move up",
                             on_click=lambda e, task=task: api.task_move_up(task.uuid),
