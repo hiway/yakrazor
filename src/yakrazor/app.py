@@ -40,7 +40,6 @@ def today():
 
 @ui.refreshable
 async def tasks_list():
-    print("Refreshing tasks list")
     tasks_all = await api.task_list_all()
     tasks_todo = await api.task_list_todo()
     tasks_done = await api.task_list_done()
@@ -74,20 +73,40 @@ async def tasks_list():
                         ),
                     ).props("dense fab-mini")
                 if index == 0:
-                    txt_task_name = ui.input(on_change=lambda e, task=task: api.task_update_name(
-                        task.uuid, txt_task_name.value), value=task.name
-                    ).classes("flex-grow font-bold").props(
-                        "dense input-style='font-weight: bold;'"
+                    txt_task_name = (
+                        ui.input(
+                            on_change=lambda e, task=task: api.task_update_name(
+                                task.uuid, txt_task_name.value
+                            ),
+                            value=task.name,
+                        )
+                        .classes("flex-grow font-bold")
+                        .props("dense input-style='font-weight: bold;'")
                     )
                 else:
-                    txt_task_name = ui.input(on_change=lambda e, task=task: api.task_update_name(
-                        task.uuid, txt_task_name.value), value=task.name
-                    ).classes("flex-grow").props("dense")
+                    txt_task_name = (
+                        ui.input(
+                            on_change=lambda e, task=task: api.task_update_name(
+                                task.uuid, txt_task_name.value
+                            ),
+                            value=task.name,
+                        )
+                        .classes("flex-grow")
+                        .props("dense")
+                    )
 
                 with ui.button(icon="more_vert").props(
                     "flat fab-mini color=grey dense"
                 ):
                     with ui.menu().classes("w-40"):
+                        ui.menu_item(
+                            "Move up",
+                            on_click=lambda e, task=task: api.task_move_up(task.uuid),
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move down",
+                            on_click=lambda e, task=task: api.task_move_down(task.uuid),
+                        ).classes("h-5")
                         ui.menu_item(
                             "Delete",
                             on_click=lambda e, task=task: api.task_delete(task.uuid),
@@ -96,8 +115,8 @@ async def tasks_list():
 
 @ui.page("/")
 async def home():
-    async def create_task():
-        await api.task_create(txt_task.value)
+    async def create_task_now():
+        await api.task_create(txt_task.value, later=False)
         txt_task.set_value("")
 
     with ui.header().classes("w-full justify-between items-center"):
@@ -113,7 +132,7 @@ async def home():
                 .classes("flex-grow")
                 .props("dense")
             )
-            txt_task.on("keydown.enter", create_task)
+            txt_task.on("keydown.enter", create_task_now)
 
     with ui.card().classes("w-full"):
         await tasks_list()
