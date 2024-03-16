@@ -80,7 +80,6 @@ async def tasks_list():
                         "dense input-style='font-weight: bold;'"
                     )
                 else:
-                    # ui.label(task.name).classes("flex-grow").props("dense")
                     txt_task_name = ui.input(on_change=lambda e, task=task: api.task_update_name(
                         task.uuid, txt_task_name.value), value=task.name
                     ).classes("flex-grow").props("dense")
