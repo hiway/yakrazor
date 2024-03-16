@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime
 from pathlib import Path
 
@@ -25,6 +26,7 @@ async def startup():
 
 async def shutdown():
     await api.stop()
+    await asyncio.sleep(0.2)
 
 
 app.on_startup(startup)
