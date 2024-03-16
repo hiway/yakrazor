@@ -67,7 +67,7 @@ async def tasks_list():
                     icon=done_icon,
                     color=done_color,
                     on_click=lambda e, task=task: api.task_update_done(
-                        task.uuid, False
+                        task.uuid, not task.done
                     ),
                 ).props("dense fab-mini")
 
