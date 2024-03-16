@@ -14,65 +14,66 @@ async def api():
 
 
 async def test_create_task(api):
-    task = await api.task.create(name="test", status="todo")
+    task = await api.task_create("test")
     assert task.name == "test"
-    assert task.status == "TODO"
+    assert task.done is False
 
 
 async def test_get_task(api):
-    task = await api.task.create(name="test", status="todo")
-    retrieved_task = await api.task.get(uuid=task.uuid)
-    assert task == retrieved_task
+    task = await api.task_create("test")
+    assert task == await api.task_get(task.uuid)
 
 
-async def test_update_task(api):
-    task = await api.task.create(name="test", status="todo")
-    updated_task = await api.task.update(uuid=task.uuid, name="test2")
-    assert updated_task.name == "test2"
-
-
-async def test_delete_task(api):
-    task = await api.task.create(name="test", status="todo")
-    await api.task.delete(uuid=task.uuid)
-    with pytest.raises(DoesNotExist):
-        await api.task.get(uuid=task.uuid)
-
-
-async def test_list_tasks(api):
-    task1 = await api.task.create(name="test1", status="todo")
-    task2 = await api.task.create(name="test2", status="todo")
-    tasks = await api.task.all()
-    assert task1 in tasks
-    assert task2 in tasks
-
-
-async def test_filter_tasks_by_status(api):
-    task1 = await api.task.create(name="test1", status="todo")
-    task2 = await api.task.create(name="test2", status="doing")
-    tasks = await api.task.filter_by_status(status="Doing")
-    assert task2 in tasks
-    assert task1 not in tasks
+async def test_list_all_tasks(api):
+    task1 = await api.task_create("test1")
+    task2 = await api.task_create("test2")
+    assert [task1, task2] == await api.task_list_all()
 
 
 async def test_list_todo_tasks(api):
-    task1 = await api.task.create(name="test1", status="todo")
-    task2 = await api.task.create(name="test2", status="doing")
-    tasks = await api.task.todo()
-    assert task1 in tasks
-    assert task2 not in tasks
-
-
-async def test_list_doing_tasks(api):
-    task1 = await api.task.create(name="test1", status="todo")
-    task2 = await api.task.create(name="test2", status="doing")
-    tasks = await api.task.doing()
-    assert task2 in tasks
-    assert task1 not in tasks
+    task1 = await api.task_create("test1")
+    task2 = await api.task_create("test2")
+    assert [task1, task2] == await api.task_list_todo()
+    await api.task_update_done(task1.uuid, True)
+    assert [task2] == await api.task_list_todo()
 
 
 async def test_list_done_tasks(api):
-    task1 = await api.task.create(name="test1", status="todo")
-    task2 = await api.task.create(name="test2", status="done")
-    tasks = await api.task.done()
-    assert task2 in tasks
-    assert task1 not in tasks
+    task1 = await api.task_create("test1")
+    task2 = await api.task_create("test2")
+    assert [] == await api.task_list_done()
+    await api.task_update_done(task1.uuid, True)
+    assert [task1] == await api.task_list_done()
+
+
+async def test_update_task_name(api):
+    task = await api.task_create("test")
+    assert task.name == "test"
+    task = await api.task_update_name(task.uuid, "new")
+    assert task.name == "new"
+
+
+async def test_update_task_done(api):
+    task = await api.task_create("test")
+    assert task.done is False
+    task = await api.task_update_done(task.uuid, True)
+    assert task.done is True
+
+
+async def test_delete_task(api):
+    task = await api.task_create("test")
+    await api.task_delete(task.uuid)
+    with pytest.raises(DoesNotExist):
+        await api.task_get(task.uuid)
+
+
+async def test_refresh(api):
+    refresh_called = False
+
+    def refresh():
+        nonlocal refresh_called
+        refresh_called = True
+
+    api.refresh_callback = refresh
+    await api.refresh()
+    assert refresh_called is True

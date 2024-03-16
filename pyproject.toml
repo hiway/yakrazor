@@ -13,6 +13,7 @@ yakrazor = "yakrazor.app:run_app"
 python = "^3.9"
 tortoise-orm = "^0.20.0"
 nicegui = "^1.4.18"
+appdirs = "^1.4.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.2"

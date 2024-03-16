@@ -1,7 +1,6 @@
-from yakrazor.models.task import Task, TaskStatus
+from yakrazor.models.task import Task
 
 
 __all__ = [
     "Task",
-    "TaskStatus",
 ]
