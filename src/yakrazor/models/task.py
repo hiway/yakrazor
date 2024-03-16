@@ -1,4 +1,3 @@
-from enum import IntEnum
 from tortoise import models, fields, validators
 
 
