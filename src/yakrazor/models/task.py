@@ -1,4 +1,3 @@
-from enum import IntEnum
 from tortoise import models, fields, validators
 
 
@@ -11,6 +10,7 @@ class Task(models.Model):
         ]
     )
     done = fields.BooleanField(default=False)
+    order = fields.IntField(default=0)
 
     # Timestamps
     created_at = fields.DatetimeField(auto_now_add=True)

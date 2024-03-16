@@ -40,7 +40,6 @@ def today():
 
 @ui.refreshable
 async def tasks_list():
-    print("Refreshing tasks list")
     tasks_all = await api.task_list_all()
     tasks_todo = await api.task_list_todo()
     tasks_done = await api.task_list_done()
@@ -73,21 +72,49 @@ async def tasks_list():
                             task.uuid, True
                         ),
                     ).props("dense fab-mini")
+                lbl_task_name = ui.label(task.name).classes("flex-grow").props("dense")
                 if index == 0:
-                    txt_task_name = ui.input(on_change=lambda e, task=task: api.task_update_name(
-                        task.uuid, txt_task_name.value), value=task.name
-                    ).classes("flex-grow font-bold").props(
-                        "dense input-style='font-weight: bold;'"
+                    lbl_task_name.classes(add="font-bold")
+
+                with ui.dialog() as dialog, ui.card():
+                    txt_task_name = ui.input(
+                        value=task.name,
+                        on_change=lambda e, task=task: api.task_update_name(
+                            task.uuid, e.value
+                        ),
                     )
-                else:
-                    txt_task_name = ui.input(on_change=lambda e, task=task: api.task_update_name(
-                        task.uuid, txt_task_name.value), value=task.name
-                    ).classes("flex-grow").props("dense")
+                    ui.button("Save", on_click=lambda: (dialog.close(), tasks_list.refresh()))
 
                 with ui.button(icon="more_vert").props(
                     "flat fab-mini color=grey dense"
                 ):
                     with ui.menu().classes("w-40"):
+                        ui.menu_item(
+                            "Edit",
+                            on_click=lambda e, task=task, dialog=dialog: dialog.open(),
+                        ).classes("pt-3 h-5")
+                        ui.separator().classes("h-1")
+                        ui.menu_item(
+                            "Move up",
+                            on_click=lambda e, task=task: api.task_move_up(task.uuid),
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move down",
+                            on_click=lambda e, task=task: api.task_move_down(task.uuid),
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move to top",
+                            on_click=lambda e, task=task: api.task_move_to_top(
+                                task.uuid
+                            ),
+                        ).classes("pt-3 h-5")
+                        ui.menu_item(
+                            "Move to bottom",
+                            on_click=lambda e, task=task: api.task_move_to_bottom(
+                                task.uuid
+                            ),
+                        ).classes("pt-3 h-5")
+                        ui.separator().classes("h-1")
                         ui.menu_item(
                             "Delete",
                             on_click=lambda e, task=task: api.task_delete(task.uuid),
@@ -96,8 +123,8 @@ async def tasks_list():
 
 @ui.page("/")
 async def home():
-    async def create_task():
-        await api.task_create(txt_task.value)
+    async def create_task_now():
+        await api.task_create(txt_task.value, later=False)
         txt_task.set_value("")
 
     with ui.header().classes("w-full justify-between items-center"):
@@ -113,7 +140,7 @@ async def home():
                 .classes("flex-grow")
                 .props("dense")
             )
-            txt_task.on("keydown.enter", create_task)
+            txt_task.on("keydown.enter", create_task_now)
 
     with ui.card().classes("w-full"):
         await tasks_list()

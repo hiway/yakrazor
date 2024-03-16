@@ -26,8 +26,20 @@ class YakrazorAPI:
         if self.refresh_callback:
             self.refresh_callback()
 
-    async def task_create(self, name: str) -> Task:
-        task = await Task.create(name=name)
+    async def task_create(self, name: str, later: bool = True) -> Task:
+        if later:
+            tasks = await Task.all().order_by("-order")
+        else:
+            tasks = await Task.all().order_by("order")
+
+        if tasks:
+            if later:
+                order = tasks[0].order + 1
+            else:
+                order = tasks[0].order - 1
+        else:
+            order = 0
+        task = await Task.create(name=name, order=order)
         await self.refresh()
         return task
 
@@ -36,15 +48,15 @@ class YakrazorAPI:
         return task
 
     async def task_list_all(self) -> List[Task]:
-        task = await Task.all()
+        task = await Task.all().order_by("order")
         return task
 
     async def task_list_todo(self) -> List[Task]:
-        task_list = await Task.filter(done=False)
+        task_list = await Task.filter(done=False).order_by("order")
         return task_list
 
     async def task_list_done(self) -> List[Task]:
-        task_list = await Task.filter(done=True)
+        task_list = await Task.filter(done=True).order_by("order")
         return task_list
 
     async def task_update_name(self, uuid: str, name: str) -> Task:
@@ -63,4 +75,48 @@ class YakrazorAPI:
     async def task_delete(self, uuid: str) -> None:
         task = await Task.get(uuid=uuid)
         await task.delete()
+        await self.refresh()
+
+    async def task_move_up(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.filter(order__lt=task.order).order_by("-order").limit(1)
+            if tasks:
+                higher_task = tasks[0]
+                task.order, higher_task.order = higher_task.order, task.order
+                await task.save()
+                await higher_task.save()
+        await self.refresh()
+
+    async def task_move_down(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.filter(order__gt=task.order).order_by("order").limit(1)
+            if tasks:
+                lower_task = tasks[0]
+                task.order, lower_task.order = lower_task.order, task.order
+                await task.save()
+                await lower_task.save()
+        await self.refresh()
+
+    async def task_move_to_top(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.all().order_by("order")
+            if tasks:
+                top_task = tasks[0]
+                task.order = top_task.order - 1
+                await task.save()
+                await top_task.save()
+        await self.refresh()
+
+    async def task_move_to_bottom(self, uuid: str) -> None:
+        task = await Task.get_or_none(uuid=uuid)
+        if task:
+            tasks = await Task.all().order_by("-order")
+            if tasks:
+                bottom_task = tasks[0]
+                task.order = bottom_task.order + 1
+                await task.save()
+                await bottom_task.save()
         await self.refresh()
