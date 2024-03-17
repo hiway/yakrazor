@@ -64,68 +64,70 @@ async def tasks_list():
         badge_text = f"{len(tasks_done)} of {len(tasks_all)} done"
         badge_color = "green" if len(tasks_done) == len(tasks_all) else "primary"
         badge_completed = ui.badge(badge_text, color=badge_color).props("floating")
+        with ui.grid(columns=8).classes("w-full"):
+            for index, task in enumerate(tasks_todo + tasks_done):
+                with ui.column().classes("col-span-1 items-end"):
+                    if task.done:
+                        done_icon="check"
+                        done_color="green"
+                    else:
+                        done_icon="check_box_outline_blank"
+                        done_color="primary"
+                    ui.button(
+                        icon=done_icon,
+                        color=done_color,
+                        on_click=lambda e, task=task: toggle_done(task),
+                    ).props("dense fab-mini")
 
-        for index, task in enumerate(tasks_todo + tasks_done):
-            with ui.row().classes("items-center w-full"):
-                if task.done:
-                    done_icon="check"
-                    done_color="green"
-                else:
-                    done_icon="check_box_outline_blank"
-                    done_color="primary"
-                ui.button(
-                    icon=done_icon,
-                    color=done_color,
-                    on_click=lambda e, task=task: toggle_done(task),
-                ).props("dense fab-mini")
+                with ui.row().classes("col-span-6 items-center"):
+                    lbl_task_name = ui.label(task.name).classes("").props("dense")
+                    if index == 0:
+                        lbl_task_name.classes(add="font-bold")
 
-                lbl_task_name = ui.label(task.name).classes("flex-grow").props("dense")
-                if index == 0:
-                    lbl_task_name.classes(add="font-bold")
-
-                with ui.dialog() as dialog, ui.card():
-                    txt_task_name = ui.input(
-                        value=task.name,
-                        on_change=lambda e, task=task: api.task_update_name(
-                            task.uuid, e.value
-                        ),
-                    )
-                    ui.button("Save", on_click=lambda: (dialog.close(), tasks_list.refresh()))
-
-                with ui.button(icon="more_vert").props(
-                    "flat fab-mini color=grey dense"
-                ):
-                    with ui.menu().classes("w-40"):
-                        ui.menu_item(
-                            "Edit",
-                            on_click=lambda e, task=task, dialog=dialog: dialog.open(),
-                        ).classes("pt-3 h-5")
-                        ui.separator().classes("h-1")
-                        ui.menu_item(
-                            "Move up",
-                            on_click=lambda e, task=task: api.task_move_up(task.uuid),
-                        ).classes("pt-3 h-5")
-                        ui.menu_item(
-                            "Move down",
-                            on_click=lambda e, task=task: api.task_move_down(task.uuid),
-                        ).classes("pt-3 h-5")
-                        ui.menu_item(
-                            "Move to top",
-                            on_click=lambda e, task=task: api.task_move_to_top(
-                                task.uuid
+                    with ui.dialog() as dialog, ui.card():
+                        txt_task_name = ui.input(
+                            value=task.name,
+                            on_change=lambda e, task=task: api.task_update_name(
+                                task.uuid, e.value
                             ),
-                        ).classes("pt-3 h-5")
-                        ui.menu_item(
-                            "Move to bottom",
-                            on_click=lambda e, task=task: api.task_move_to_bottom(
-                                task.uuid
-                            ),
-                        ).classes("pt-3 h-5")
-                        ui.separator().classes("h-1")
-                        ui.menu_item(
-                            "Delete",
-                            on_click=lambda e, task=task: api.task_delete(task.uuid),
-                        ).classes("pt-3 h-5")
+                        )
+                        ui.button("Save", on_click=lambda: (dialog.close(), tasks_list.refresh()))
+
+                with ui.column().classes("col-span-1 items-start"):
+                    with ui.button(icon="more_vert").props(
+                        "flat fab-mini color=grey dense"
+                    ):
+                        with ui.menu().classes("w-40"):
+                            ui.menu_item(
+                                "Edit",
+                                on_click=lambda e, task=task, dialog=dialog: dialog.open(),
+                            ).classes("pt-3 h-5")
+                            ui.separator().classes("h-1")
+                            ui.menu_item(
+                                "Move up",
+                                on_click=lambda e, task=task: api.task_move_up(task.uuid),
+                            ).classes("pt-3 h-5")
+                            ui.menu_item(
+                                "Move down",
+                                on_click=lambda e, task=task: api.task_move_down(task.uuid),
+                            ).classes("pt-3 h-5")
+                            ui.menu_item(
+                                "Move to top",
+                                on_click=lambda e, task=task: api.task_move_to_top(
+                                    task.uuid
+                                ),
+                            ).classes("pt-3 h-5")
+                            ui.menu_item(
+                                "Move to bottom",
+                                on_click=lambda e, task=task: api.task_move_to_bottom(
+                                    task.uuid
+                                ),
+                            ).classes("pt-3 h-5")
+                            ui.separator().classes("h-1")
+                            ui.menu_item(
+                                "Delete",
+                                on_click=lambda e, task=task: api.task_delete(task.uuid),
+                            ).classes("pt-3 h-5")
 
 
 @ui.page("/")
