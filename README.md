@@ -9,13 +9,15 @@ But you've lost track of what prompted you
 to take up the side quest and now the original task
 remains unfinished and you've moved on to something else.
 
-
 ## What is Yakrazor?
 
 At version 0.1, Yakrazor is a dead simple ToDo list 
 that is designed to assist in keeping track of 
 what you were doing before you had to move your attention to something else.
 
+### Screenshot
+
+![Screenshot 2024-03-17 at 13-40-00 Yakrazor](https://github.com/hiway/yakrazor/assets/23116/27f9fe6e-6b87-470c-b434-7e4f011d6b1d)
 
 ## How do I use it?
 
