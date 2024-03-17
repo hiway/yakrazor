@@ -9,93 +9,99 @@ But you've lost track of what prompted you
 to take up the side quest and now the original task
 remains unfinished and you've moved on to something else.
 
-Yup.
-
-
-## Why Yakrazor?
-
-- I get distracted or go off on a side quest too often and
-  I forget how I got here and
-  what was the last thing I was doing and
-  the one before that...
-- Some days I don't want to start with the most demanding task
-- I feel overwhelmed with too many pending tasks
-- I don't wake up at the same time every day and
-  fixed reminders and calendar events don't work for me
-- I forget to add todos for ad-hoc requests
-- I have way too many things to get done and
-  many of those things depend on someone else and
-  I have to follow up, which I also forget
-- I forget to use my todo app
-
-If the constraints sound familiar, 
-Yakrazor might help.
-
 
 ## What is Yakrazor?
 
-- Todo list 
-- Task scheduler
-- Long term planner
-- Self-hosted web app
+At version 0.1, Yakrazor is a dead simple ToDo list 
+that is designed to assist in keeping track of 
+what you were doing before you had to move your attention to something else.
 
 
-## Features
+## How do I use it?
+
+The list of tasks is treated like a stack, 
+you add new tasks at the top.
+Every time you need to shift your attention to something,
+make a note of what you're about to do.
+You may find yourself several tasks deep and 
+need to backtrack to the original task that set you off on this side quest.
+Mark each tangent task off as completed and 
+the top task will be what you were doing before.
+
+If something else comes up that needs to be done later, 
+press Shift+Enter to put it at the bottom of the todo list.
 
 
-### Create tasks with
+User interactions:
 
-- Text
-- Voice
-- Photo
-- Video
-
-
-### Organize and schedule tasks with
-
-- Due date/time
-- Importance
-- Urgency
-- Effort
-- Estimated time to complete
-- Other tasks
-- Tags
-- Places
-- People
-- Organizations
-- Activity (walking, driving, workout, active apps)
-- Weather conditions or predictions
-- Sun rise or set times
-- Links (Base URLs to match in text)
-- Clips (data scraped from any web site or api)
-- Files (track changes in local files)
+- Type what you need to get done and press Enter
+  - You can use voice input on phone etc.
+  - Tasks are added to top of todo list
+  - Add a task to bottom of todo list by holding Shift while you press Enter
+- Tap or click on the empty checkbox on left of a task to mark it done
+  - Completed tasks are moved below pending tasks
+- Tap on a completed task's checkbox if you realise it needs more work
+  - Removing the done check moves task to top of the todo list
+- Tap on the three vertical dots on right of the task name for more actions
+  - Edit task name
+  - Move task up or down in the list
+  - Move task to top or bottom of list
+  - Delete task
 
 
-### Track and manage time spent on tasks
+## Install
 
-- Automatic time tracking
-- Time spent on tangents is included
-- Pomodoro system to manage work and breaks
-
-
-### Suggested tasks 
-
-- Take your pick from list of tasks
-- Filtered and ranked based on your energy and context
-- System trains on your choices to suggest tasks that
-  you're most likely to complete
+Currently Yakrazor is available as source distribution via Github,
+it will be available to install via Python's `pip` or `pipx` utilities soon.
 
 
-### Projects, Habits and Goals
+Using [poetry](https://python-poetry.org/docs/):
 
-- Break large tasks into smaller chunks
-- Repeating tasks to build up to a habit or goal
-- Templates for recurring projects 
-  (such as growing vegetables, or daily/weekly self-care)
+```console
+git clone https://github.com/hiway/yakrazor.git
+cd yakrazor
+poetry install
+
+poetry run yakrazor
+```
 
 
-### Sessions
+Using Python's `venv`
 
-- Start a new week or day with blank slate
-- Pick what you want to tackle
-- Review or continue previous sessions later
+```console
+git clone https://github.com/hiway/yakrazor.git
+cd yakrazor
+
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+
+yakrazor
+```
+
+You'll need to remember to `source .venv/bin/activate` every time.
+
+
+## Accessing from multiple devices
+
+I personally use and recommend [Tailscale](https://tailscale.com).
+Yakrazor will be available via your machine's Tailscale internal IP,
+or even with its hostname on your phone once you have Tailscale set up
+on both devices.
+
+
+## Feedback and Contributing
+
+Use Github's [Disussions](https://github.com/hiway/yakrazor/discussions/new/choose) 
+for general topics and [Issues](https://github.com/hiway/yakrazor/issues) for bug reports.
+
+While this is a personal project to scratch my own itch, 
+I welcome contributions that improve the user experience,
+fix bugs or add meaningful features. 
+
+Please [disuss](https://github.com/hiway/yakrazor/discussions/new/choose)
+what you plan to contribute if it is beyond a few lines of code
+to save your and my time and efforts!
+
+I'll be adopting a Code of Conduct for this project soon,
+if the mere mention of this makes you not want to contribute, great!
