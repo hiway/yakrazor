@@ -43,6 +43,13 @@ def today():
 
 @ui.refreshable
 async def tasks_list():
+    async def toggle_done(task):
+        if task.done:
+            await api.task_update_done(task.uuid, False)
+            await api.task_move_to_top(task.uuid)
+        else:
+            await api.task_update_done(task.uuid, True)
+
     tasks_all = await api.task_list_all()
     tasks_todo = await api.task_list_todo()
     tasks_done = await api.task_list_done()
@@ -69,9 +76,7 @@ async def tasks_list():
                 ui.button(
                     icon=done_icon,
                     color=done_color,
-                    on_click=lambda e, task=task: api.task_update_done(
-                        task.uuid, not task.done
-                    ),
+                    on_click=lambda e, task=task: toggle_done(task),
                 ).props("dense fab-mini")
 
                 lbl_task_name = ui.label(task.name).classes("flex-grow").props("dense")
