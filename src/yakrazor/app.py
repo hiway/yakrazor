@@ -4,6 +4,7 @@ from pathlib import Path
 
 from appdirs import user_data_dir
 from nicegui import app, ui
+from nicegui.events import GenericEventArguments
 
 from yakrazor.api import YakrazorAPI
 
@@ -124,8 +125,14 @@ async def tasks_list():
 
 @ui.page("/")
 async def home():
-    async def create_task_now():
+    async def create_task_now(e: GenericEventArguments):
+        if e.args["shiftKey"] is True:
+            return
         await api.task_create(txt_task.value, later=False)
+        txt_task.set_value("")
+
+    async def create_task_later(e: GenericEventArguments):
+        await api.task_create(txt_task.value, later=True)
         txt_task.set_value("")
 
     with ui.header().classes("w-full justify-between items-center"):
@@ -141,6 +148,7 @@ async def home():
                 .classes("flex-grow")
                 .props("dense")
             )
+            txt_task.on("keydown.shift.enter", create_task_later)
             txt_task.on("keydown.enter", create_task_now)
 
     with ui.card().classes("w-full"):
